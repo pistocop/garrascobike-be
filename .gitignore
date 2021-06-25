@@ -54,3 +54,6 @@ output/
 myflaskapp/
 bower_components
 .env/
+
+garrascobike_be/ml_model
+!garrascobike_be/ml_model/.gitkeep
