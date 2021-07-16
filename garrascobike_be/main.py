@@ -6,9 +6,18 @@ from dotenv import find_dotenv
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi import HTTPException
+from loguru import logger
+
+from submodules.knn_manager import KnnManager
 
 load_dotenv(find_dotenv())
 prefix = os.getenv("CLUSTER_ROUTE_PREFIX", "").rstrip("/")
+
+model_local_path = "./ml_model/20210625162104"
+knn_mng = KnnManager()
+logger.info("Loading ML model...")
+knn_mng.load_model(model_local_path)
+logger.info("ML model loaded!")
 
 app = FastAPI(
     title="garrascobike-be",
@@ -28,9 +37,11 @@ supported_bikes = ["canyon", "stoic"]
 
 @app.get("/recommender/{bike_name}")
 def recommender(bike_name: str):
-    if bike_name not in supported_bikes:
-        raise HTTPException(status_code=404, detail=f"Bike `{bike_name}` not found")
-    return "canyon spectral"
+    suggestions = knn_mng.get_prediction(bike_name)
+    results = []
+    for score, bike in suggestions:
+        results.append({"score": score, "bike": bike})
+    return results
 
 
 if __name__ == "__main__":
