@@ -15,7 +15,7 @@ from loguru import logger
 from scipy.sparse import csr_matrix
 from sklearn.neighbors import NearestNeighbors
 
-from submodules.data_manager import DataManager
+from data_manager import DataManager
 
 
 class MLInterface:
