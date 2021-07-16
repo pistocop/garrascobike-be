@@ -28,6 +28,7 @@ def health_check():
     return f"{datetime.utcnow()}"
 
 
+
 @app.get("/load")
 def load(path: str):
     logger.info("Loading ML model...")
