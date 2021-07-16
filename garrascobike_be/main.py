@@ -14,9 +14,6 @@ prefix = os.getenv("CLUSTER_ROUTE_PREFIX", "").rstrip("/")
 
 model_local_path = "./ml_model/20210625162104"
 knn_mng = KnnManager()
-logger.info("Loading ML model...")
-knn_mng.load_model(model_local_path)
-logger.info("ML model loaded!")
 
 app = FastAPI(
     title="garrascobike-be",
@@ -29,6 +26,13 @@ app = FastAPI(
 @app.get("/health")
 def health_check():
     return f"{datetime.utcnow()}"
+
+
+@app.get("/load")
+def load(path: str):
+    logger.info("Loading ML model...")
+    knn_mng.load_model(model_local_path)
+    logger.info("ML model loaded!")
 
 
 supported_bikes = ["canyon", "stoic"]
