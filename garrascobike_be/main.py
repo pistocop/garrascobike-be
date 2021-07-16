@@ -1,6 +1,7 @@
 import os
 from datetime import datetime
 
+import uvicorn as uvicorn
 from dotenv import find_dotenv
 from dotenv import load_dotenv
 from fastapi import FastAPI
@@ -30,3 +31,8 @@ def recommender(bike_name: str):
     if bike_name not in supported_bikes:
         raise HTTPException(status_code=404, detail=f"Bike `{bike_name}` not found")
     return "canyon spectral"
+
+
+if __name__ == "__main__":
+    # noinspection PyTypeChecker
+    uvicorn.run(app, host="0.0.0.0", port=8888)

@@ -4,14 +4,9 @@
 
 ## Setup
 
-- Install deta [cli](https://docs.deta.sh/docs/cli/commands/)
-- Log in into deta CLI
-- cd into `garrascobike_be`
-    - *deploy* the service
-        - `deta new --name garrascobike-be --project garrascobike`
-    - **update** the back-end
-        - `deta deploy`
-- visit [https://web.deta.sh/home/](https://web.deta.sh/home/)
+- Create the heroku app:
+    - `heroku apps:create garrascobike-be --region eu`
+- 
 
 ## Logs
 - You can see the logs visiting the webpage under the Visor tab
