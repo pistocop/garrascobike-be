@@ -5,10 +5,9 @@ import uvicorn as uvicorn
 from dotenv import find_dotenv
 from dotenv import load_dotenv
 from fastapi import FastAPI
-from fastapi import HTTPException
 from loguru import logger
 
-from submodules.knn_manager import KnnManager
+from .submodules.knn_manager import KnnManager
 
 load_dotenv(find_dotenv())
 prefix = os.getenv("CLUSTER_ROUTE_PREFIX", "").rstrip("/")
