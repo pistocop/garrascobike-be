@@ -12,7 +12,7 @@ from .submodules.knn_manager import KnnManager
 load_dotenv(find_dotenv())
 prefix = os.getenv("CLUSTER_ROUTE_PREFIX", "").rstrip("/")
 
-model_local_path = "./garrascobike_be/ml_model/20210625162104"
+model_local_path = "./ml_model/20210625162104"
 knn_mng = KnnManager()
 logger.info("Loading ML model...")
 knn_mng.load_model(model_local_path)
