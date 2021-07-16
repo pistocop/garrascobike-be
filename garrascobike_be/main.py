@@ -31,7 +31,7 @@ def health_check():
 @app.get("/load")
 def load(path: str):
     logger.info("Loading ML model...")
-    knn_mng.load_model(model_local_path)
+    knn_mng.load_model(path)
     logger.info("ML model loaded!")
 
 
