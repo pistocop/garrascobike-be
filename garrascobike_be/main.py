@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from loguru import logger
 
-from submodules.knn_manager import KnnManager
+from garrascobike_be.submodules.knn_manager import KnnManager
 from utils.backblaze import download_garrascobike_model
 
 # Load resources
