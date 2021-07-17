@@ -12,8 +12,8 @@ from garrascobike_be.utils.backblaze import download_garrascobike_model
 
 # Load resources
 load_dotenv(find_dotenv())
-local_models_folder = "./ml_model/"
-models_host_info = "./ml_model/hosted-model-info.json"
+local_models_folder = "./garrascobike_be/ml_model/"
+models_host_info = "./garrascobike_be/ml_model/hosted-model-info.json"
 local_model_path = download_garrascobike_model(local_path=local_models_folder,
                                                model_info_path=models_host_info,
                                                app_key_id=os.getenv("BB_APP_KEY_ID"),
