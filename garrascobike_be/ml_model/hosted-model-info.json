@@ -1,5 +1,5 @@
 {
   "host": "backblaze",
   "bucket": "garrascobike-bucket",
-  "ml_model": "ml-models/20210625162104"
+  "model_path": "ml-models/20210625162104"
 }

@@ -1,4 +1,7 @@
+import json
+from os import makedirs
 from os.path import basename
+from os.path import exists
 from os.path import join
 
 from b2sdk.v2 import B2Api
@@ -40,3 +43,37 @@ class BackblazeManager:
             file_mng = bucket.download_file_by_name(file_extended_name)
             file_mng.save_to(file_output_path)
             logger.debug(f"File '{bucket_name}:{file_extended_name}' stored at '{local_folder_path}'")
+
+
+def download_garrascobike_model(local_path: str,
+                                model_info_path: str,
+                                app_key_id: str,
+                                app_key: str,
+                                ) -> str:
+    # Load remote ML info
+    model_info = json.loads(open(model_info_path, 'r').read())
+
+    # Create support info
+    remote_model_path = model_info["model_path"]
+    remote_bucket_name = model_info["bucket"]
+    model_id = basename(remote_model_path)
+    local_model_path = join(local_path, model_id)
+
+    # Preliminary checks
+    if exists(local_model_path):
+        logger.info(f"ML model loading skipped: '{local_model_path}' already exist")
+        return local_model_path
+
+    if not app_key or not app_key_id:
+        msg = "app_key or app_key_id not provided, cannot connect to backblaze"
+        logger.error(msg)
+        raise EnvironmentError(msg)
+
+    # Download the model
+    logger.info(f"ML model '{remote_model_path}' downloading...")
+    makedirs(local_model_path)
+    bb_mng = BackblazeManager(app_key_id, app_key)
+    bb_mng.download_folder(remote_bucket_name, remote_model_path, local_model_path)
+    logger.info(f"ML model '{remote_model_path}' downloaded!")
+
+    return local_model_path
