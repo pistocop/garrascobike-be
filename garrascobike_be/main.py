@@ -24,6 +24,7 @@ app = FastAPI(
     description="Back-end services for garrascobike App",
 )
 knn_mng = KnnManager()
+knn_mng.load_model(local_model_path)
 
 
 # Define endpoints
@@ -32,27 +33,18 @@ def health_check():
     return f"{datetime.utcnow()}"
 
 
-@app.get("/load_automatic")
-def load_automatic():
-    logger.info(f"Loading ML model from '{local_model_path}'...")
-    knn_mng.load_model(local_model_path)
-    logger.info("ML model loaded!")
-
-
-@app.get("/load")
-def load(path: str):
-    logger.info("Loading ML model...")
-    knn_mng.load_model(path)
-    logger.info("ML model loaded!")
-
-
 @app.get("/recommender/{bike_name}")
 def recommender(bike_name: str):
-    suggestions = knn_mng.get_prediction(bike_name)
-    results = []
-    for score, bike in suggestions:
-        results.append({"score": score, "bike": bike})
-    return results
+    try:
+        suggestions = knn_mng.get_prediction(bike_name)
+        results = []
+        for score, bike in suggestions:
+            results.append({"score": score, "bike": bike})
+        return results
+    except Exception:
+        msg = f"Bike {bike_name} not found"
+        logger.info(msg)
+        return msg
 
 
 if __name__ == "__main__":
