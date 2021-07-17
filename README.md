@@ -1,19 +1,10 @@
 # garrascobike-be
 
-> run on deta setup
+## Environment variables
 
-## Setup
-
-- Create the heroku app:
-    - `heroku apps:create garrascobike-be --region eu`
-- 
-
-## Logs
-- You can see the logs visiting the webpage under the Visor tab
-
-## Requirements
-- Deta deploy looks like create a "diff" between the requirements.txt and the packages installed on the Micro.
-    Then apply (install/uninstall) only the differences.
-- Starlette error:
-    - Even if reported under requirements.txt, the deta service fall in error during the starlette import
-    - Solution: no clean solution found, but the error looks like disappear aftera a delete/recreate of the micros
+- Backblaze credentials are required in order to download the ML model
+- Setup environment variables or create a `./garrascobike_be/.env` file
+- ℹ Those are the variables required:
+    - BB_APP_KEY_NAME=garrascobike-downloader
+    - BB_APP_KEY=K0xxxxxxxxxxxxxxxxx
+    - BB_APP_KEY_ID=00xxxxxxxxxxxxxxxxx
