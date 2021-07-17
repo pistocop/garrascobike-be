@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from loguru import logger
 
-from .submodules.knn_manager import KnnManager
+from submodules.knn_manager import KnnManager
 
 load_dotenv(find_dotenv())
 prefix = os.getenv("CLUSTER_ROUTE_PREFIX", "").rstrip("/")
@@ -26,7 +26,6 @@ app = FastAPI(
 @app.get("/health")
 def health_check():
     return f"{datetime.utcnow()}"
-
 
 
 @app.get("/load")
