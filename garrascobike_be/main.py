@@ -21,9 +21,9 @@ local_model_path = download_garrascobike_model(local_path=local_models_folder,
                                                app_key=os.getenv("BB_APP_KEY"))
 
 origins = [
-    # "http://localhost:8888",
-    # "https://localhost:8888",
+    os.getenv("CORS_ORIGIN")
 ]
+logger.info(f"CORS origins allowed: {origins}")
 
 app = FastAPI(
     title="garrascobike-be",
@@ -32,10 +32,10 @@ app = FastAPI(
 )
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[os.getenv("BE_HOST")],
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    # allow_methods=["*"], # TODO remove?
+    # allow_headers=["*"],
 )
 knn_mng = KnnManager()
 knn_mng.load_model(local_model_path)
