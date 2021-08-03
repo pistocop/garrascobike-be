@@ -21,8 +21,8 @@ local_model_path = download_garrascobike_model(local_path=local_models_folder,
                                                app_key=os.getenv("BB_APP_KEY"))
 
 origins = [
-    "http://localhost:8888",
-    "https://localhost:8888",
+    # "http://localhost:8888",
+    # "https://localhost:8888",
 ]
 
 app = FastAPI(
@@ -32,7 +32,7 @@ app = FastAPI(
 )
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[os.getenv("BE_HOST")],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
