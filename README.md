@@ -2,15 +2,13 @@
 
 ## Environment variables
 
-- Backblaze credentials are required in order to download the ML model
+- Backblaze credentials required in order to download the ML model
 
 - Setup environment variables:
-    - Locally: create a `./garrascobike_be/.env` file (you can copy the `.env_example` and rename in it `.env`)
-    - Heroku: use the command `heroku config:set` to set the variables
-- ℹ Those are the variables required:
-    - BB_APP_KEY_NAME=garrascobike-downloader
-    - BB_APP_KEY=K0xxxxxxxxxxxxxxxxx
-    - BB_APP_KEY_ID=00xxxxxxxxxxxxxxxxx
+    - Locally: create a `./garrascobike_be/.env` file coping the `.env_example` and rename in it `.env`
+    - Fill the variables with your credentials
+- Publish to the heroku service:
+    - use the command `heroku config:set` to set the variables
 
 ## Heroku
 
