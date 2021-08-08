@@ -5,6 +5,7 @@ import uvicorn as uvicorn
 from dotenv import find_dotenv
 from dotenv import load_dotenv
 from fastapi import FastAPI
+from fastapi import HTTPException
 from loguru import logger
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -55,11 +56,10 @@ def recommender(bike_name: str):
         for score, bike in suggestions:
             results.append({"score": score, "bike": bike})
         return results
-    except Exception as e:
-        logger.warning(f"Exception: {e}")
+    except ValueError:
         msg = f"Bike {bike_name} not found"
         logger.info(msg)
-        return msg
+        raise HTTPException(status_code=404, detail=msg)
 
 
 if __name__ == "__main__":
