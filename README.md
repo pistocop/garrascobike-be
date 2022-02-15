@@ -1,5 +1,9 @@
 # garrascobike-be
 
+## TODO
+- [ ] review the cors section and code: refactory + restrict cors to front-end
+- [ ] 
+
 ## Environment variables
 
 - Backblaze credentials required in order to download the ML model
