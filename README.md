@@ -18,3 +18,28 @@
 
     - Publish new version (tip: is a gitflow approach): <br>
       `git push heroku main`
+
+
+## API
+
+- `/health` : health check
+- `/recommender/{bike_name}` : bike suggestions
+  - e.g. reply:
+    ```
+    $ curl https://garrascobike-be.herokuapp.com/recommender/stoic | jq
+    [
+        {
+          "score": 0,
+          "bike": "stoic"
+        },
+        {
+          "score": 7.211102550927978,
+          "bike": "gf"
+        },
+        {
+          "score": 7.3484692283495345,
+          "bike": "superior"
+        },
+      ...
+    ]
+    ```
