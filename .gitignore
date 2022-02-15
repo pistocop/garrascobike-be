@@ -1,5 +1,4 @@
 .idea
-.vscode
 .venv
 app/.env
 
@@ -56,5 +55,6 @@ myflaskapp/
 bower_components
 .env/
 .env
+.venv
 garrascobike_be/ml_model/
 !garrascobike_be/ml_model/hosted-model-info.json
