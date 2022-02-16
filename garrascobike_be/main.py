@@ -61,6 +61,9 @@ def recommender(bike_name: str):
         logger.info(msg)
         raise HTTPException(status_code=404, detail=msg)
 
+@app.get("/brands/available")
+def get_brands_available():
+    return knn_mng.get_brands()
 
 if __name__ == "__main__":
     # noinspection PyTypeChecker

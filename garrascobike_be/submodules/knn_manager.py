@@ -36,6 +36,7 @@ class KnnManager(MLInterface):
     max_product_words = 2
 
     def __init__(self):
+        self.brands = None
         self.knn = None
         self.thread2int = None
         self.product2int = None
@@ -97,11 +98,13 @@ class KnnManager(MLInterface):
         train_matrix_path = join(runtime_dir, "train_matrix.joblib")
         thread2int_path = join(runtime_dir, "thread2int.pkl")
         product2int_path = join(runtime_dir, "product2int.pkl")
+        brands_path = join(runtime_dir, "brands.txt")
         paths_collection = {
             "knn_path": knn_path,
             "train_matrix_path": train_matrix_path,
             "thread2int_path": thread2int_path,
             "product2int_path": product2int_path,
+            "brands_path": brands_path,
         }
         return paths_collection
 
@@ -126,6 +129,7 @@ class KnnManager(MLInterface):
         paths_collection = KnnManager.path_builder(path)
 
         # Load the data
+        self.brands = open(paths_collection["brands_path"], "r").read().split("\n")
         self.knn = load(paths_collection['knn_path'])
         self.train_matrix = load(paths_collection['train_matrix_path'])
         self.thread2int = pickle.loads(open(paths_collection['thread2int_path'], 'rb').read())
@@ -147,3 +151,6 @@ class KnnManager(MLInterface):
         distances, indices = distances.tolist().pop(), indices.tolist().pop()
         results = [(dis, self.product2int.inverse[idx]) for dis, idx in zip(distances, indices)]
         return results
+
+    def get_brands(self) -> List[str]:
+        return self.brands
