@@ -1,16 +1,19 @@
 # garrascobike-be
 
-## TODO
-- [ ] review the cors section and code: refactory + restrict cors to front-end
-- [ ] 
+Garrascobike back-end code, functionalities:
+- Python back-end Build with [FastAPI](https://fastapi.tiangolo.com/) library
+- Download recommendation system from Backblaze
+- Run on [heroku](https://www.heroku.com/)
 
-## Environment variables
+## Setup
 
+- Python version: `python-3.9.5`
 - Backblaze credentials required in order to download the ML model
 
 - Locally setup:
     - create a `./garrascobike_be/.env` file coping the `.env_example` and rename in it `.env`
     - Fill the variables with your credentials
+
 - Publish to the heroku service:
     - use the command `heroku config:set` to set the variables
 
@@ -27,6 +30,18 @@
 ## API
 
 - `/health` : health check
+- `/brands/available`: list of all supported bikes
+  - e.g. reply:
+  ```
+  [
+    "pike",
+    "mtb",
+    "giant",
+    "timberjack",
+    "bike",
+    ...
+  ]
+  ```
 - `/recommender/{bike_name}` : bike suggestions
   - e.g. reply:
     ```
@@ -47,3 +62,4 @@
       ...
     ]
     ```
+
