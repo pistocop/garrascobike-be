@@ -1,28 +1,31 @@
 # garrascobike-be
+> Code of the Garrascobike back-end service
 
-Garrascobike back-end code, functionalities:
+
+## Technologies
+
 - Python back-end Build with [FastAPI](https://fastapi.tiangolo.com/) library
-- Download recommendation system from Backblaze
+- Download the recommendation system model from Backblaze
+  - Model not provided, train your with [garrascobike-core](https://github.com/pistocop/garrascobike-core)
 - Run on [heroku](https://www.heroku.com/)
+
 
 ## Setup
 
 - Python version: `python-3.9.5`
 - Backblaze credentials required in order to download the ML model
-
 - Locally setup:
     - create a `./garrascobike_be/.env` file coping the `.env_example` and rename in it `.env`
     - Fill the variables with your credentials
-
 - Publish to the heroku service:
-    - use the command `heroku config:set` to set the variables
+  - use the command `heroku config:set` to set the variables
+
 
 ## Heroku
 
 - Command snippets:
     - Scale the workers (0 to disable): <br>
       `heroku ps:scale web=0`, `heroku ps:scale web=1`
-
     - Publish new version (tip: is a gitflow approach): <br>
       `git push heroku main`
 
